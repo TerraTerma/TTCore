@@ -1,0 +1,95 @@
+How to use the Mech API.
+
+The MechAPI is a simple idea that is increably usful API that is based on the Sponge DataManipulator API. The whole 
+point of it is, it allows you to save custom data within a premade object, this means you dont need to create 
+another class for Player, you just need to add your own Mech object.
+The MechAPI is designed to hook ontop of any interface or class, once hooked on, you dont need to worry about it, 
+it will maintain itself.
+
+How to use:
+	Creating a Mech:
+		This is very simple, it follows a basic set of rules.
+		First of all you need to implement the DataHandler interface
+		
+		<Code>:
+			public class Blar implements DataHandler {
+			}
+		<code>
+		
+		after that, one of the constructor for the class needs to be either 0 parameters or a Object... parameter,
+		this allows the getOrCreate method to work.
+		
+		<Code>:
+			public class Blar implements DataHandler {
+			
+				public Blar(){
+					//0 parameters
+				}
+				
+				public Blar(Object... values){
+					//Object... parameter
+					Player player = (Player)values[0];
+				}
+			}
+		</code>	
+		
+	Storing a mech into your class:
+		I have made this as simple as possible. Just extends AbstractDataStore.
+		
+		<Code>:
+			public class Blar extends AbstractDataStore{
+			}
+			 
+		</code>
+		
+		Please note there are other versions of the DataStore in the folder named DataStoreTypes.
+		If you have a interface and want to use the MechAPI, thats also easy, just implement the non abstract version
+		
+		<Code>:
+			public interface Blar extends DataStore {
+			}
+		<code>
+		
+	Storing a mech into a object:
+		The MechAPI is now on version2.2 this means you can now store multiple values of the same kind.
+		to store them, you can either store a single value (this will override any other values of the same kind) or
+		store as a collection (even if it is just one - this will not override any others there)
+		
+		<Code>:
+			//this will override any other of the same kind
+			TTPlayer player:
+			DataHandler mech;
+			player.addSingleData(true, mech);
+			
+			//note that the true is the force option, if it is true, it will override any there, if false, then it will
+			not add your mech if another one is there
+		</code>; 
+		
+		<Code>:
+			//this will not override any but still add it
+			TTPlayer player;
+			DataHandler mech;
+			player.addData(mech);
+			
+			//note that you can add multiple dataHandlers using the same method
+		<code>
+	getting stored data:
+		The MechAPI is now on version2.2 this means you can now store multiple values of the same kind.
+		
+		It is recommended that you know what mech you are dealing with and how it work, is it a multi mech
+		or a single, if you dont know ask the person who made the mech or treat it as a multiple.
+		
+		If the mech is a multi mech it means multiple mechs can be saved under a single store. This is great
+		for mechs that need to be per world or something like that. To gain one of these do the following.
+		
+		<Code>:
+			TTPlayer player;
+			List<MultipleMech> list = player.getData(MultipleMech.class); 
+		</code>
+		
+		if the mech is a single mech it means only 1 can be saved under a single store. This is great for saving values that should remain the same no matter what (such as a location of something).
+		
+		<Code>:
+			TTPlayer player;
+			Optional<SingleMech> opMech = player.getSingleData(SingleMech.class);
+		</code>

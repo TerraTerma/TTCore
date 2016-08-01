@@ -1,0 +1,49 @@
+How to use the Entity API.
+
+The EntityAPI is a simple extention to the normal EntityAPI from Bukkit, however this Entity API brings the Mech to the
+old API, this means you get all the benefits from the Mech API to the old Entity API. 
+
+Currently this API only supports the following Entities:
+- PLAYER
+- OFFLINE_PLAYER
+
+If you wish to add more Entities then please make a pull request.
+
+Please note, the implemtation folder should not be used when working with other plugins
+
+How to use:
+	Using Mech:
+		read the Mech API to understand how to use the Mech API part of it
+	
+	getting Bukkit Entity:
+		Currently the API does not support TTEntity and BukkitEntity combined and may cause issues if we try, so getting 
+		the Bukkit Entity from the TTEntity is a requirement. To actually get the Object of Entity it is just a simple
+		method. Please note that if you are working with the direct Entity (such as TTPlayer) it will return the actual
+		object to work with (so it would return Player if you are using TTPlayer)
+		
+			<Code>:
+				TTEntity ttEntity;
+				Entity bukkitEntity = ttEntity.getEntity();
+			</code>
+			
+		if a interface within the EntityAPI is not a Entity (such as OfflinePlayer) then there will be a method for getting
+		the original Bukkit object.
+		
+	getting a TTEntity:
+		to convert a Bukkit Entity to a TTEntity, it is as simple as doing the following. Please note that you will need to
+		upcast if you wish to use to all methods.
+		
+			<Code>:
+				Zombie zombie:
+				TTEntity entity = TTEntity.convert(zombie);
+			</code>
+			
+		Please note that all TTEntity interfaces will have there own static version that will automatic give you the correct
+		object.
+		
+			<Code>:
+				OfflinePlayer player;
+				TTAccount account = TTAccount.getAccount(player);
+			</code>
+	Root File:
+		the root file should not be seen
