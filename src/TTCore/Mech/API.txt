@@ -8,6 +8,7 @@ it will maintain itself.
 
 How to use:
 	Creating a Mech:
+	
 		This is very simple, it follows a basic set of rules.
 		First of all you need to implement the DataHandler interface
 		
@@ -32,6 +33,35 @@ How to use:
 				}
 			}
 		</code>	
+		
+		it is recommended that you add the class into the Mech List too on your plugins boot. This will make your mech
+		work properly with other API's 
+		
+		<Code>:
+		    DataHandler.MECH.add(Blar.class);
+		</code>
+		
+	Creating a Savable Mech:
+		This is a little different to the normal Mech due to the fact on how it loads the data. First of all you need
+		to implement the savable data handler. Please note that you can not use a contructor at all in the savable ones
+		
+		<Code>:
+			public class Blar implements SavableData {
+			
+				@Override
+				public void save(Saver saver){
+				}
+				
+				@Override
+				public void load(Saver saver){
+				}
+			}
+		</code>
+		
+		the save method will launch every so often (as a backup) and give you a saver. That saver will have the correct
+		location provided for you. All you need to do is use the set and save methods in the saver.
+		The load method will launch every time (once per object) a new Store is created (of the correct time). 
+		Just load the Mech data into the mech object. 
 		
 	Storing a mech into your class:
 		I have made this as simple as possible. Just extends AbstractDataStore.

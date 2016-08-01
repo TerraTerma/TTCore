@@ -1,0 +1,37 @@
+How to use the Saver API.
+
+The saver API is a simple API that extends from YamlConfiguration. The SaverAPI is a lot like the normal YamlConiguration
+but instead of needing to remember all the methods (getBoolean, getInteger, getString) you just need to remember one, not
+only that but because it has the File and the YamlConfiguration in the same class, it means it is easy to transfer the
+Saver around API's. The MechAPI (save part of it) relies heavily on the Saver API because of its ease to transfer.
+
+You can also extend from the Saver class, allowing you to save select things and direct things. such as the EventSaver from
+ModLog that saves the basic data of a event and then uses abstract to gain the rest of the data
+
+creating a Saver
+	this is very simple
+	<Code>:
+		Saver saver = new Saver(File file);
+	</code>
+
+getting data
+	again simple. You can add as many Strings onto the end as you like, the divides represent a . in the YamlConfiguration
+	<Code>:
+		Saver saver;
+		String data = saver.get(String.class, "loc", "at", "tion");
+		ItemStack item = saver.get(ItemStack.class, "path");
+		int something = saver.get(Integer.class, "path", "amount");
+	</code>
+	
+setting data
+	again simple. again works like the getter with the path
+	
+	<Code>:
+		Saver saver;
+		saver.set(thing, "path", "to", "it");
+		saver.set(anotherThing, "path", "to", "the", "other");
+		saver.save();
+	</code>
+	
+
+I dont know what to put in this because it is extreemly simple as long as you understand basic java. 

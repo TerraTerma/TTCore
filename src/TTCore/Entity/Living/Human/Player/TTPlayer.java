@@ -12,11 +12,17 @@ import TTCore.Entity.Implementation.Living.Human.Player.TTPlayerImp;
 /**
  * 
  * @author mosemister (Evan)
- * @since 01/08/2016 (DD/MM/YYYY) 14:00 (24:00 - UK time)
+ * @since 01/08/2016 (DD/MM/YYYY) 14:00 (24 hour - UK time)
  * @git First upload of the new API
  * ---------------------------------------------------------
  *
+ * @author mosemister (Evan)
+ * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
+ * @git Added savable mechs
+ * ---------------------------------------------------------
+ * 
  */
+
 public interface TTPlayer extends TTEntity, TTAccount{
 	
 	/**
