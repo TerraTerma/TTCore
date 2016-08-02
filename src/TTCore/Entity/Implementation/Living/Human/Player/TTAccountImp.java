@@ -17,27 +17,29 @@ import TTCore.Savers.Saver;
  * @author mosemister (Evan)
  * @since 01/08/2016 (DD/MM/YYYY) 14:00 (24 hour - UK time)
  * @git First upload of the new API
- * ---------------------------------------------------------
+ *      ---------------------------------------------------------
  *
  * @author mosemister (Evan)
  * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
  * @git Added savable mechs
- * ---------------------------------------------------------
+ *      ---------------------------------------------------------
  * 
  */
 public class TTAccountImp extends AbstractSavableDataStore implements TTAccount {
 
 	protected OfflinePlayer PLAYER;
-	
+
 	public TTAccountImp(OfflinePlayer player) {
 		super(new File(TTEntity.ROOT_FILE, "Player/" + player.getUniqueId() + ".yml"));
 		PLAYER = player;
 		DataHandler.getHandlers().stream().forEach(d -> {
-			if (d.isAssignableFrom(SavableData.class) && (d.isAssignableFrom(PlayerData.class))){
+			if (d.isAssignableFrom(SavableData.class) && (d.isAssignableFrom(PlayerData.class))) {
 				try {
-					SavableData data = (SavableData)d.newInstance();
+					SavableData data = (SavableData) d.newInstance();
 					Saver saver = new Saver(getFile());
-					String[] target = {"Mech", d.getSimpleName()};
+					String[] target = {
+							"Mech", d.getSimpleName()
+					};
 					saver.set("Target", target);
 					saver.setSection(target);
 					data.load(saver);
@@ -52,7 +54,5 @@ public class TTAccountImp extends AbstractSavableDataStore implements TTAccount 
 	public OfflinePlayer getPlayer() {
 		return PLAYER;
 	}
-	
-	
 
 }

@@ -46,7 +46,7 @@ How to use:
 		to implement the savable data handler. Please note that you can not use a contructor at all in the savable ones
 		
 		<Code>:
-			public class Blar implements SavableData {
+			public class Blar implements SavableData, PlayerData {
 			
 				@Override
 				public void save(Saver saver){
@@ -62,6 +62,9 @@ How to use:
 		location provided for you. All you need to do is use the set and save methods in the saver.
 		The load method will launch every time (once per object) a new Store is created (of the correct time). 
 		Just load the Mech data into the mech object. 
+		
+		Please also note that the example has PlayerData implemented, this is the type of Store it should be stored to.
+		If you do not have one of these (check the Stores folder for all of them) then the load method will not work.
 		
 	Storing a mech into your class:
 		I have made this as simple as possible. Just extends AbstractDataStore.

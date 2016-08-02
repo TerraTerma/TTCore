@@ -1,4 +1,5 @@
 name: TTCore
 version: 1.0
 main: TTCore.TTCoreMain
+depend: [Vault]
 

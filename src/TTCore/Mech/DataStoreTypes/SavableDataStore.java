@@ -11,28 +11,29 @@ import TTCore.Savers.Saver;
  * @author mosemister (Evan)
  * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
  * @git Added savable mechs
- * ---------------------------------------------------------
+ *      ---------------------------------------------------------
  * 
  */
 
 public interface SavableDataStore extends DataStore {
-	
+
 	/**
-	 * gets the associated file 
+	 * gets the associated file
+	 * 
 	 * @return a file in the correct location
 	 */
 	public File getFile();
-	
+
 	/**
 	 * saves all the Mechs
 	 */
 	public void saveAll();
-	
+
 	public static class AbstractSavableDataStore extends AbstractDataStore implements SavableDataStore {
 
 		File FILE;
-		
-		public AbstractSavableDataStore(File file){
+
+		public AbstractSavableDataStore(File file) {
 			FILE = file;
 		}
 
@@ -40,17 +41,17 @@ public interface SavableDataStore extends DataStore {
 		public File getFile() {
 			return FILE;
 		}
-		
+
 		@Override
 		public void saveAll() {
 			Saver saver = new Saver(FILE);
 			getData().stream().forEach(d -> {
-				if(d instanceof SavableData){
-					SavableData save = (SavableData)d;
+				if (d instanceof SavableData) {
+					SavableData save = (SavableData) d;
 					save.save(saver);
 				}
 			});
-		}		
+		}
 	}
 
 }

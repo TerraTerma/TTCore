@@ -13,16 +13,16 @@ import org.bukkit.configuration.file.YamlConfiguration;
  * @author mosemister (Evan)
  * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
  * @git Added savable mechs
- * ---------------------------------------------------------
+ *      ---------------------------------------------------------
  * 
  */
 
 public class Saver {
-	
+
 	protected File FILE;
 	protected YamlConfiguration CONFIG;
 	protected ConfigurationSection SECTION;
-	
+
 	public Saver(File file) {
 		FILE = file;
 		CONFIG = YamlConfiguration.loadConfiguration(file);
@@ -47,9 +47,9 @@ public class Saver {
 			}
 		}
 		Object object = null;
-		if(SECTION == null){
+		if (SECTION == null) {
 			object = CONFIG.get(location);
-		}else{
+		} else {
 			object = SECTION.get(location);
 		}
 		return (T) object;
@@ -68,14 +68,14 @@ public class Saver {
 			}
 		}
 		Object object = null;
-		if(SECTION == null){
+		if (SECTION == null) {
 			object = CONFIG.get(location);
-		}else{
+		} else {
 			object = SECTION.get(location);
 		}
 		return (T) object;
 	}
-	
+
 	public Saver setSection(String... loc) {
 		String location = null;
 		for (String loc2 : loc) {
@@ -88,8 +88,8 @@ public class Saver {
 		SECTION = CONFIG.getConfigurationSection(location);
 		return this;
 	}
-	
-	public Saver setSection(String[]... loc){
+
+	public Saver setSection(String[]... loc) {
 		String location = null;
 		for (String[] loc2 : loc) {
 			for (String loc3 : loc2) {
@@ -115,9 +115,9 @@ public class Saver {
 			}
 		}
 		List<?> list = null;
-		if(SECTION == null){
+		if (SECTION == null) {
 			list = CONFIG.getList(location);
-		}else{
+		} else {
 			list = SECTION.getList(location);
 		}
 		if (list != null) {
@@ -143,9 +143,9 @@ public class Saver {
 			}
 		}
 		List<?> list = null;
-		if(SECTION == null){
+		if (SECTION == null) {
 			list = CONFIG.getList(location);
-		}else{
+		} else {
 			list = SECTION.getList(location);
 		}
 		if (list != null) {
@@ -167,22 +167,22 @@ public class Saver {
 				location = (location + "." + loc2);
 			}
 		}
-		if(SECTION == null){
+		if (SECTION == null) {
 			CONFIG.set(location, object);
-		}else{
+		} else {
 			SECTION.set(location, object);
 		}
 		return this;
 	}
-	
-	public Saver set(Object object, ConfigurationSection section, String... loc){
+
+	public Saver set(Object object, ConfigurationSection section, String... loc) {
 		String location = section.getCurrentPath();
 		for (String loc2 : loc) {
-				location = (location + "." + loc2);
+			location = (location + "." + loc2);
 		}
-		if(SECTION == null){
+		if (SECTION == null) {
 			CONFIG.set(location, object);
-		}else{
+		} else {
 			SECTION.set(location, object);
 		}
 		return this;
@@ -199,14 +199,14 @@ public class Saver {
 				}
 			}
 		}
-		if(SECTION == null){
+		if (SECTION == null) {
 			CONFIG.set(location, object);
-		}else{
+		} else {
 			SECTION.set(location, object);
 		}
 		return this;
 	}
-	
+
 	public Saver set(Object object, ConfigurationSection section, String[]... loc) {
 		String location = section.getCurrentPath();
 		for (String[] loc2 : loc) {
@@ -218,9 +218,9 @@ public class Saver {
 				}
 			}
 		}
-		if(SECTION == null){
+		if (SECTION == null) {
 			CONFIG.set(location, object);
-		}else{
+		} else {
 			SECTION.set(location, object);
 		}
 		return this;

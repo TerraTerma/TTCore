@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
  * @author mosemister (Evan)
  * @since 01/08/2016 (DD/MM/YYYY) 14:00 (24 hour - UK time)
  * @git First upload of the new API
- * ---------------------------------------------------------
+ *      ---------------------------------------------------------
  *
  * @author mosemister (Evan)
  * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
  * @git Added savable mechs
- * ---------------------------------------------------------
+ *      ---------------------------------------------------------
  * 
  */
 
@@ -31,7 +31,7 @@ public interface DataStore {
 	public <M extends DataHandler> Optional<M> getOrCreateSingleData(Class<M> mech, Object... requirements);
 
 	public boolean addSingleData(boolean force, DataHandler data);
-	
+
 	public boolean addData(DataHandler... data);
 
 	public boolean removeData(DataHandler... mech);
@@ -42,9 +42,9 @@ public interface DataStore {
 
 		List<DataHandler> DATA = new ArrayList<>();
 
-		public AbstractDataStore(){
+		public AbstractDataStore() {
 		}
-		
+
 		@Override
 		public List<DataHandler> getData() {
 			return DATA;
@@ -82,9 +82,9 @@ public interface DataStore {
 				}
 			}
 		}
-		
+
 		@Override
-		public boolean addSingleData(boolean force, DataHandler data){
+		public boolean addSingleData(boolean force, DataHandler data) {
 			Optional<? extends DataHandler> opMech = getSingleData(data.getClass());
 			if (opMech.isPresent()) {
 				if (force) {
@@ -110,7 +110,7 @@ public interface DataStore {
 		@Override
 		public boolean removeData(Class<? extends DataHandler> mech) {
 			DATA.stream().forEach(d -> {
-				if(mech.isInstance(d)){
+				if (mech.isInstance(d)) {
 					DATA.remove(d);
 				}
 			});
