@@ -18,6 +18,10 @@ import java.util.stream.Collectors;
  * @git Added savable mechs
  *      ---------------------------------------------------------
  * 
+ * @author mosemister (Evan)
+ * @since 01/08/2016 (DD/MM/YYYY) 16:22 (24 hour - UK time)
+ * @git Mech now work
+ *      ---------------------------------------------------------
  */
 
 public interface DataStore {
@@ -28,7 +32,7 @@ public interface DataStore {
 
 	public <M extends DataHandler> List<M> getData(Class<M> data);
 
-	public <M extends DataHandler> Optional<M> getOrCreateSingleData(Class<M> mech, Object... requirements);
+	public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech);
 
 	public boolean addSingleData(boolean force, DataHandler data);
 
@@ -40,7 +44,7 @@ public interface DataStore {
 
 	public static class AbstractDataStore implements DataStore {
 
-		List<DataHandler> DATA = new ArrayList<>();
+		protected List<DataHandler> DATA = new ArrayList<>();
 
 		public AbstractDataStore() {
 		}
@@ -63,24 +67,20 @@ public interface DataStore {
 		}
 
 		@Override
-		public <M extends DataHandler> Optional<M> getOrCreateSingleData(Class<M> mech, Object... requirements) {
+		public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech) {
 			Optional<M> value = getSingleData(mech);
 			if (value.isPresent()) {
-				return value;
+				return value.get();
 			} else {
-				@SuppressWarnings("unchecked")
-				Class<? extends Object>[] cArgs = new Class[requirements.length];
-				for (int A = 0; A < requirements.length; A++) {
-					cArgs[A] = requirements[A].getClass();
-				}
 				try {
-					M value2 = mech.getDeclaredConstructor(cArgs).newInstance(requirements);
+					M value2 = mech.newInstance();
 					addSingleData(false, value2);
-					return Optional.of(value2);
-				} catch (Exception e) {
-					return Optional.empty();
+					return value2;
+				} catch (InstantiationException | IllegalAccessException e) {
+					e.printStackTrace();
 				}
 			}
+			return null;
 		}
 
 		@Override

@@ -32,6 +32,10 @@ import net.milkbowl.vault.economy.EconomyResponse;
  * @git Player data loads
  *      ---------------------------------------------------------
  * 
+ * @author mosemister (Evan)
+ * @since 01/08/2016 (DD/MM/YYYY) 16:22 (24 hour - UK time)
+ * @git Mech now work
+ * 
  */
 
 public class TTPlayerImp implements TTPlayer {
@@ -65,8 +69,8 @@ public class TTPlayerImp implements TTPlayer {
 	}
 
 	@Override
-	public <M extends DataHandler> Optional<M> getOrCreateSingleData(Class<M> mech, Object... requirements) {
-		return ACCOUNT.getOrCreateSingleData(mech, requirements);
+	public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech) {
+		return ACCOUNT.getOrCreateSingleData(mech);
 	}
 
 	@Override

@@ -14,6 +14,10 @@ import TTCore.Savers.Saver;
  * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
  * @git Added savable mechs
  *      ---------------------------------------------------------
+ * @author mosemister (Evan)
+ * @since 03/08/2016 (DD/MM/YYYY) 20:22 (24 hour - UK time)
+ * @git Mechs now save
+ *      ---------------------------------------------------------
  * 
  */
 
@@ -33,6 +37,6 @@ public interface SavableData extends DataHandler {
 	 * @param saver
 	 *            = the exact location to load from
 	 */
-	public void load(Saver saver);
+	public boolean load(Saver saver);
 
 }

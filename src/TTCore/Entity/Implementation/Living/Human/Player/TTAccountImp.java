@@ -23,7 +23,18 @@ import TTCore.Savers.Saver;
  * @since 01/08/2016 (DD/MM/YYYY) 20:59 (24 hour - UK time)
  * @git Added savable mechs
  *      ---------------------------------------------------------
- * 
+ * @author mosemister (Evan)
+ * @since 01/08/2016 (DD/MM/YYYY) 16:22 (24 hour - UK time)
+ * @git Mech now work
+ *      ---------------------------------------------------------
+ * @author mosemister (Evan)
+ * @since 03/08/2016 (DD/MM/YYYY) 20:22 (24 hour - UK time)
+ * @git Mechs now save
+ *      ---------------------------------------------------------
+ * @author mosemister (Evan)
+ * @since 04/08/2016 (DD/MM/YYYY) 13:59 (24 hour - UK time)
+ * @git Section fix
+ * 		---------------------------------------------------------
  */
 public class TTAccountImp extends AbstractSavableDataStore implements TTAccount {
 
@@ -33,19 +44,18 @@ public class TTAccountImp extends AbstractSavableDataStore implements TTAccount 
 		super(new File(TTEntity.ROOT_FILE, "Player/" + player.getUniqueId() + ".yml"));
 		PLAYER = player;
 		DataHandler.getHandlers().stream().forEach(d -> {
-			if (d.isAssignableFrom(SavableData.class) && (d.isAssignableFrom(PlayerData.class))) {
-				try {
-					SavableData data = (SavableData) d.newInstance();
+			try {
+				DataHandler data = d.newInstance();
+				if ((data instanceof SavableData) && (data instanceof PlayerData)) {
+					SavableData data2 = (SavableData) data;
 					Saver saver = new Saver(getFile());
-					String[] target = {
-							"Mech", d.getSimpleName()
-					};
-					saver.set("Target", target);
-					saver.setSection(target);
-					data.load(saver);
-				} catch (Exception e) {
-					e.printStackTrace();
+					saver.setSection("Mechs", d.getSimpleName());
+					if(data2.load(saver)){
+						DATA.add(data2);
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}

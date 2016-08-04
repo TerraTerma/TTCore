@@ -17,8 +17,8 @@ How to use:
 			}
 		<code>
 		
-		after that, one of the constructor for the class needs to be either 0 parameters or a Object... parameter,
-		this allows the getOrCreate method to work.
+		after that, one of the constructor for the class needs to be 0 parameter,
+		this allows the getOrCreate method to work as well as the savable.
 		
 		<Code>:
 			public class Blar implements DataHandler {
@@ -42,8 +42,7 @@ How to use:
 		</code>
 		
 	Creating a Savable Mech:
-		This is a little different to the normal Mech due to the fact on how it loads the data. First of all you need
-		to implement the savable data handler. Please note that you can not use a contructor at all in the savable ones
+		This is a little different to the normal Mech due to the fact it has abstract methods you need to work with.
 		
 		<Code>:
 			public class Blar implements SavableData, PlayerData {

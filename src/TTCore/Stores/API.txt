@@ -1,0 +1,36 @@
+How to use the storeAPI:
+
+The store api is designed to store as many objects as you want under a single object, this saves you from creating a whole
+new class that stores them. The storesAPI is designed to store as many objects relating to each other as possible.
+If that confuses you, think of a table chart. a Store is a single row within that table. 
+
+Storing objects:
+	Please use the correct Stores type, if there isnt a large enough Stores type then please request one of the size you ask
+	for (if you are needing to store 7+ more .... I would recommend that you consider the data your storing.
+	
+	to store a single value (you would be suprised how usful it is instead of storing a object - gets around the final issue)
+	use the OneStore class, if you need to store 2 then use the TwoStore, etc.
+	
+	<Code>:
+		OneStore<String> store = new OneStore<>(null);
+	</code>
+	
+	there you can see that the example is storing a single value of null.
+	
+Getting/Setting data in the store:
+	This one is simple. 
+	
+	<Code>:
+		TwoStore<Integer, String> store;
+		Integer number = store.getOne();
+		String words = store.getTwo();
+	</code>
+	
+	the same pattern goes with setting too. (you can set the values at the contructor too)
+	
+	<Code>
+		TwoStore<Integer, String> store;
+		store.setOne(6);
+	</code>
+	
+Again i have no idea what to write for this API, its just too simple XD

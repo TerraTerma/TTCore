@@ -48,9 +48,12 @@ public interface SavableDataStore extends DataStore {
 			getData().stream().forEach(d -> {
 				if (d instanceof SavableData) {
 					SavableData save = (SavableData) d;
+					String path = "Mechs." + save.getClass().getSimpleName();
+					saver.setSection(path);
 					save.save(saver);
 				}
 			});
+			saver.save();
 		}
 	}
 

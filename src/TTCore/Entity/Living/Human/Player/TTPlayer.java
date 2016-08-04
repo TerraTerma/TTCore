@@ -21,6 +21,11 @@ import TTCore.Entity.Implementation.Living.Human.Player.TTPlayerImp;
  * @git Added savable mechs
  *      ---------------------------------------------------------
  * 
+ * @author mosemister (Evan)
+ * @since 01/08/2016 (DD/MM/YYYY) 16:22 (24 hour - UK time)
+ * @git Mech now work
+ *      ---------------------------------------------------------
+ * 
  */
 
 public interface TTPlayer extends TTEntity, TTAccount {

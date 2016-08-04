@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import TTCore.Entity.Living.Human.Player.TTPlayer;
+import TTCore.Mech.DataHandler;
 import TTCore.Mech.DataStoreTypes.SavableDataStore;
 
 /**
@@ -67,6 +69,15 @@ public interface TTEntity extends SavableDataStore {
 			new IOException("Entity can not be converted into a TTEntity").printStackTrace();
 			return null;
 		}
+	}
+	
+	/**
+	 * gets the TTEntity that relates to a mech
+	 * @param data = TTEntity mech
+	 * @return = the TTEntity
+	 */
+	public static Optional<TTEntity> getRelatedMech(DataHandler data){
+		return TTEntity.REGISTERED_ENTITIES.stream().filter(p -> p.getData().contains(data)).findFirst();
 	}
 
 }
