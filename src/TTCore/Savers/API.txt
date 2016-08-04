@@ -32,6 +32,26 @@ setting data
 		saver.set(anotherThing, "path", "to", "the", "other");
 		saver.save();
 	</code>
+Getting all possible values:
+	If you need to get all possible values and keys to go with that, now you can. You can get all keys and values of the
+	target or you can get the nested keys as values as well as the target ones.
+	
+	<Code>:
+		Saver saver;
+		Map<String, Object> values = saver.values(false);
+	</code>
+	
+	the String part of the map will be the key (as in the path) and the Object will be the value that was there (you will
+	need to upcast it). the boolean on the values method is a check for if you want the nested values too.
+SpecialSaver use:
+	SpecialSaver is a very usful tool that saves and gets special objects that are not normally supported with Saver (saver
+	supports all object types that YamlConfig does). There are some object types that are in the SpecialSaver to remove
+	confusion. 
+	
+	<Code>:
+		Saver saver;
+		Optional<ItemStack> opItem = new SpecialSaver().getItemStack(saver, "Path", "To", "It");
+	</code>
 	
 
 I dont know what to put in this because it is extreemly simple as long as you understand basic java. 
