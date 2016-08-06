@@ -1,0 +1,58 @@
+How to use the Oversized API.
+
+The oversized API is used to put as much text as you like on a field that is limited, such as a sign line, or scoreboard 
+objective. There are a few already programmed into the Oversized API and here are all the oversized Core will have
+
+	As of 1.10.2
+	- Signs
+	- Scoreboard - objectives
+	
+
+Creating your own oversized:
+	after creating a new class, you need to extends OversizedTicker. This will give you a method that is simply called tick,
+	and is called every time the text should be updated and moved. You will also have a contructer with the requirements of
+	limit. this is simply the amount of letters you wish to present.
+	
+	<Code>:
+		public class Blar extends OversizedTicker{
+		
+			public Blar(int limit){
+				super(limit);
+			}
+		
+			public void tick(){
+			}
+		}
+	</code>
+	
+	after that you can use the following method to get the next bit of text. The full message is the whole message
+	
+	<Code>:
+		String fullMessage;
+		String displayNowMessage = getNext(fullMessage);
+	</code>
+	
+Working with OverrizedSign:
+
+	working with the oversized sign is easy as long as you get your head around it.
+	
+	first of all you will need to create a list of ThreeStore<Integer, Boolean, ChatColor>. The first is the line number,
+	the second is if that linenumber should be oversized, that chatColor is the color of the sign (can be null). and then
+	use the contructor
+	
+	<code>:
+		Block sign;
+		List<ThreeStore<Integer, Boolean, ChatColor>> actLine = new ArrayList<>();
+		actLine.add(1, true, null); //line 2 will now be oversized with no chatColor
+		actLine.add(3, true, ChatColor.YELLOW); //line 4 will now be oversized with chatColor yellow
+		OversizedSign osSign = new OversizedSign(sign, actLine);
+	</code>
+	
+	after that it will automaticly start to display the whole line on the sign
+	
+force moving the text:
+	this works with all Oversized objects. if you have a oversized object then you can force it to display the next part.
+	<code>
+		OversizedTicker ticker;
+		ticker.tick();
+	</code>
