@@ -1,6 +1,9 @@
 package TTCore.Entity.Living.Human.Player;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -119,5 +122,30 @@ public interface TTPlayer extends TTEntity, TTAccount {
 		} else {
 			return new TTPlayerImp(player);
 		}
+	}
+	
+	public static Optional<TTPlayer> getPlayer(UUID uuid){
+		Optional<TTEntity> opEntity = REGISTERED_ENTITIES.stream().filter(e -> {
+			Entity entity = e.getEntity();
+			if (entity instanceof Player) {
+				return (((TTPlayer)entity).getPlayer().getUniqueId().equals(uuid));
+			}
+			return false;
+		}).findFirst();
+		if(opEntity.isPresent()){
+			return Optional.of((TTPlayer)opEntity.get());
+		}
+		return Optional.empty();
+	}
+	
+	public static List<TTEntity> getPlayers(){
+		List<TTEntity> entities = REGISTERED_ENTITIES.stream().filter(e -> {
+			Entity entity = e.getEntity();
+			if (entity instanceof Player) {
+				return true;
+			}
+			return false;
+		}).collect(Collectors.toList());
+		return entities;
 	}
 }
