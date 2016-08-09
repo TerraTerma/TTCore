@@ -11,7 +11,7 @@ import org.bukkit.OfflinePlayer;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Implementation.Living.Human.Player.TTAccountImp;
-import TTCore.Mech.DataStoreTypes.SavableDataStore;
+import TTCore.Mech.DataStores.SavableDataStore;
 
 /**
  * 

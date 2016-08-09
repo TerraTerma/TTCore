@@ -5,6 +5,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -88,6 +92,12 @@ public interface TTPlayer extends TTEntity, TTAccount {
 	 * @return = if the amount can be added
 	 */
 	public boolean deposit(double amount);
+	
+	public List<BossBar> getBars();
+	
+	public BossBar createBar(boolean override, BarColor colour, BarStyle style, String message, BarFlag... flags);
+	
+	public TTPlayer removeBars();
 
 	/**
 	 * @param return

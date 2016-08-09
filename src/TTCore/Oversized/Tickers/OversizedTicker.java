@@ -1,4 +1,4 @@
-package TTCore.Mech.Oversized.Tickers;
+package TTCore.Oversized.Tickers;
 
 import java.util.ArrayList;
 import java.util.List;

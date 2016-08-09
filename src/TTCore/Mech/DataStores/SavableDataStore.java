@@ -1,4 +1,4 @@
-package TTCore.Mech.DataStoreTypes;
+package TTCore.Mech.DataStores;
 
 import java.io.File;
 

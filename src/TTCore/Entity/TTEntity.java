@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
-import TTCore.Mech.DataStoreTypes.SavableDataStore;
+import TTCore.Mech.DataStores.SavableDataStore;
 
 /**
  * 
