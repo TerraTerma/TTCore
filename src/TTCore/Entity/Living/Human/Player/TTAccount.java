@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -32,6 +33,17 @@ import TTCore.Mech.DataStores.SavableDataStore;
 
 public interface TTAccount extends SavableDataStore {
 
+	/**
+	 * if the player is online, use this to get the correct
+	 * player object. This will get round a lot of issues
+	 * @return the TTPlayer object
+	 */
+	public Optional<TTPlayer> getOnline();
+	
+	/**
+	 * gets the bukkit offline player
+	 * @return the bukkit offline player for this account
+	 */
 	public OfflinePlayer getPlayer();
 	
 	/**

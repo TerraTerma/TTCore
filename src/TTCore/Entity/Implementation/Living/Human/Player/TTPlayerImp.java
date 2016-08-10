@@ -191,4 +191,9 @@ public class TTPlayerImp implements TTPlayer {
 		return this;
 	}
 
+	@Override
+	public Optional<TTPlayer> getOnline() {
+		return Optional.of(this);
+	}
+
 }

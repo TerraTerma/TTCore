@@ -1,11 +1,13 @@
 package TTCore.Entity.Implementation.Living.Human.Player;
 
 import java.io.File;
+import java.util.Optional;
 
 import org.bukkit.OfflinePlayer;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Living.Human.Player.TTAccount;
+import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
 import TTCore.Mech.DataHandlers.PlayerData;
 import TTCore.Mech.DataHandlers.SavableData;
@@ -63,6 +65,11 @@ public class TTAccountImp extends AbstractSavableDataStore implements TTAccount 
 	@Override
 	public OfflinePlayer getPlayer() {
 		return PLAYER;
+	}
+
+	@Override
+	public Optional<TTPlayer> getOnline() {
+		return TTPlayer.getPlayer(getPlayer().getUniqueId());
 	}
 
 }
