@@ -42,9 +42,9 @@ Working with OverrizedSign:
 	
 	<code>:
 		Block sign;
-		List<ThreeStore<Integer, Boolean, ChatColor>> actLine = new ArrayList<>();
-		actLine.add(1, true, null); //line 2 will now be oversized with no chatColor
-		actLine.add(3, true, ChatColor.YELLOW); //line 4 will now be oversized with chatColor yellow
+		List<OversizedSignLine> actLine = new ArrayList<>();
+		actLine.add(new OversizedSignLine("This message is over 16 letters", 1)); //line 2 will now be oversized with no chatColor
+		actLine.add(new OversizedSignLine("Another oversized line", 3, ChatColor.YELLOW); //line 4 will now be oversized with chatColor yellow
 		OversizedSign osSign = new OversizedSign(sign, actLine);
 	</code>
 	

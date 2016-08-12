@@ -1,8 +1,10 @@
 package TTCore.Entity.Implementation.Living.Human.Player;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.bukkit.Bukkit;
@@ -20,6 +22,9 @@ import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
+import ru.tehkode.permissions.PermissionGroup;
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 /**
  * 
@@ -52,7 +57,7 @@ import net.milkbowl.vault.economy.EconomyResponse;
 public class TTPlayerImp implements TTPlayer {
 
 	TTAccount ACCOUNT;
-	List<BossBar> BARS = new ArrayList<>();
+	Map<BossBar, Boolean> BARS = new HashMap<>();
 
 	public TTPlayerImp(Player player) {
 		ACCOUNT = new TTAccountImp(player);
@@ -169,7 +174,7 @@ public class TTPlayerImp implements TTPlayer {
 	}
 
 	@Override
-	public List<BossBar> getBars() {
+	public Map<BossBar, Boolean> getBars() {
 		return BARS;
 	}
 
@@ -179,7 +184,7 @@ public class TTPlayerImp implements TTPlayer {
 			removeBars();
 		}
 		BossBar bar = Bukkit.createBossBar(message, colour, style, flags);
-		BARS.add(bar);
+		BARS.put(bar, false);
 		bar.addPlayer(getPlayer());
 		bar.setVisible(true);
 		return bar;
@@ -187,13 +192,33 @@ public class TTPlayerImp implements TTPlayer {
 
 	@Override
 	public TTPlayer removeBars() {
-		getBars().stream().forEach(b -> b.removeAll());
+		getBars().entrySet().stream().forEach(b -> {
+			if(b.getValue()){
+				b.getKey().removeAll();
+				BARS.remove(b.getKey());
+			}
+		});
 		return this;
 	}
 
 	@Override
 	public Optional<TTPlayer> getOnline() {
 		return Optional.of(this);
+	}
+
+	@Override
+	public boolean lockBar(BossBar bar, boolean lock) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public PermissionGroup getPermissionGroup() {
+		PermissionUser user = PermissionsEx.getUser(getPlayer());
+		List<PermissionGroup> group = Arrays.asList(user.getGroups());
+		group.remove(user.getParents());
+		return group.get(0);
 	}
 
 }

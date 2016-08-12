@@ -10,7 +10,6 @@ import TTCore.TTCoreMain;
 
 public abstract class OversizedTicker {
 	
-	int LAST;
 	int LIMIT;
 	
 	static List<OversizedTicker> TICKERS = new ArrayList<>();
@@ -23,9 +22,9 @@ public abstract class OversizedTicker {
 		TICKERS.add(this);
 	}
 	
-	public String getNext(String before){
-		if(before.length() == LAST){
-			LAST = 0;
+	public String getNext(String before, int last){
+		if(before.length() == last){
+			last = 0;
 		}
 		String after = "";
 		int A = 0;
@@ -34,15 +33,14 @@ public abstract class OversizedTicker {
 			limit = before.length();
 		}
 		for(; A < limit; A++){
-			after = (after + before.charAt(A+LAST));
+			after = (after + before.charAt(A+last));
 		}
-		LAST++;
 		return after;
 	}
 	
-	public String getNext(String before, ChatColor color){
-		if(before.length() == LAST){
-			LAST = 0;
+	public String getNext(String before, int last, ChatColor color){
+		if(before.length() == last){
+			last = 0;
 		}
 		String after = color.toString();
 		int A = 0;
@@ -51,9 +49,9 @@ public abstract class OversizedTicker {
 			limit = before.length();
 		}
 		for(; A < limit; A++){
-			after = (after + before.charAt(A+LAST));
+			after = (after + before.charAt(A+last));
 		}
-		LAST++;
+		last++;
 		return after;
 	}
 	

@@ -1,6 +1,7 @@
 package TTCore.Entity.Living.Human.Player;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Implementation.Living.Human.Player.TTPlayerImp;
+import ru.tehkode.permissions.PermissionGroup;
 
 /**
  * 
@@ -93,11 +95,31 @@ public interface TTPlayer extends TTEntity, TTAccount {
 	 */
 	public boolean deposit(double amount);
 	
-	public List<BossBar> getBars();
+	/**
+	 * the boolean is if it is locked or not
+	 * @return all the current bossbars being displayed
+	 */
+	public Map<BossBar, Boolean> getBars();
 	
+	/**
+	 * @return displays a new boss bar to the player 
+	 */
 	public BossBar createBar(boolean override, BarColor colour, BarStyle style, String message, BarFlag... flags);
 	
+	/**
+	 * @return removes all bars that are not locked 
+	 */
 	public TTPlayer removeBars();
+	
+	/**
+	 * @return locks a bar onto the player
+	 */
+	public boolean lockBar(BossBar bar, boolean lock);
+	
+	/**
+	 * @return gets the pex permission name
+	 */
+	public PermissionGroup getPermissionGroup();
 
 	/**
 	 * @param return

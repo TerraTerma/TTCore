@@ -2,23 +2,20 @@ package TTCore.Oversized.Tickers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
-import TTCore.Stores.ThreeStore;
-
 public class OversizedSign extends OversizedTicker{
 
 	Block BLOCK;
-	List<ThreeStore<Integer, Boolean, ChatColor>> APPLY = new ArrayList<>();
+	List<OversizedSignLine> APPLY = new ArrayList<>();
 	
-	public OversizedSign(Block block, List<ThreeStore<Integer, Boolean, ChatColor>> three) {
+	public OversizedSign(Block block, List<OversizedSignLine> lines) {
 		super(16);
 		BLOCK = block;
-		APPLY = three;
+		APPLY = lines;
 	}
 	
 	public Sign getSign(){
@@ -28,25 +25,54 @@ public class OversizedSign extends OversizedTicker{
 	@Override
 	public void tick() {
 		Sign sign = getSign();
-		for(int A = 0; A < 3; A++){
-			final int B = A;
-			Optional<ThreeStore<Integer, Boolean, ChatColor>> opStore = APPLY.stream().filter(s -> s.getOne() == B).findFirst();
-			String line = sign.getLine(A);
-			String next = null;
-			if(opStore.isPresent()){
-				ThreeStore<Integer, Boolean, ChatColor> store = opStore.get();
-				if(store.getTwo()){
-					if(store.getThree() == null){
-						next = getNext(line);
-					}else{
-						next = getNext(line, store.getThree());
-					}
-				}
-			}
-			sign.setLine(A, next);
+		for(OversizedSignLine store : APPLY){
+			String display = getNext(store.getLine(), store.getLast());
+			store.setLast(store.getLast() + 1);
+			sign.setLine(store.getLineNumber(), display);
 		}
 		sign.update();
 		
+	}
+	
+	public static class OversizedSignLine{
+		String ORIGINAL;
+		int LINE_NUMBER;
+		int LAST;
+		ChatColor COLOR;
+		
+		public OversizedSignLine(String message, int line){
+			ORIGINAL = message;
+			LINE_NUMBER = line;
+			LAST = 0;
+			COLOR = ChatColor.BLACK;
+		}
+		
+		public OversizedSignLine(String message, int line, ChatColor color){
+			ORIGINAL = message;
+			LINE_NUMBER = line;
+			LAST = 0;
+			COLOR = color;
+		}
+		
+		public String getLine(){
+			return ORIGINAL;
+		}
+		
+		public int getLineNumber(){
+			return LINE_NUMBER;
+		}
+		
+		public int getLast(){
+			return LAST;
+		}
+		
+		public void setLast(int last){
+			LAST = last;
+		}
+		
+		public ChatColor getColour(){
+			return COLOR;
+		}
 	}
 
 }
