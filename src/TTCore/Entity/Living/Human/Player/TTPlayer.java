@@ -67,6 +67,13 @@ public interface TTPlayer extends TTEntity, TTAccount {
 	 *            = the message
 	 */
 	public void sendMessageAsPlayer(String message);
+	
+	/**
+	 * this will send a message to the player from the player args
+	 * @param player who sent the message
+	 * @param unformattedMessage = the message
+	 */
+	public void sendMessageFromPlayer(TTPlayer player, String unformattedMessage);
 
 	/**
 	 * gets the amount of money the player currently has
@@ -187,6 +194,4 @@ public interface TTPlayer extends TTEntity, TTAccount {
 		}).collect(Collectors.toList());
 		return entities;
 	}
-	
-	public void sendMessage(String unformattedMessage);
 }

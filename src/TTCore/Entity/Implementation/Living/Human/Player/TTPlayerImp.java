@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
@@ -126,15 +127,28 @@ public class TTPlayerImp implements TTPlayer {
 	public void sendMessage(String prefix, String message) {
 		getPlayer().sendMessage("[" + prefix + "] " + message);
 	}
-	
-	@Override
-	public void sendMessage(String unformattedMessage){
-		getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', unformattedMessage));
-	}
 
 	@Override
 	public void sendMessage(Plugin plugin, String message) {
 		getPlayer().sendMessage("[" + plugin.getName() + "] " + message);
+	}
+	
+	@Override
+	public void sendMessageFromPlayer(TTPlayer player, String unformattedMessage){
+		Player bPlayer = player.getPlayer();
+		String coloured = ChatColor.translateAlternateColorCodes('&', unformattedMessage);
+		if(StringUtils.containsIgnoreCase(coloured, "%World%")){
+			coloured = coloured.replace("%World%", bPlayer.getWorld().getName());
+		}
+		/* do the same for the following.
+		 * %name% - player normal name
+		 * %dname% - players display name 
+		 * %group% - players rank name
+		 * %prefix% - playera groups prefix
+		 * 
+		 * any others you think of*/
+		
+		getPlayer().sendMessage(coloured);
 	}
 
 	@Override
