@@ -209,8 +209,7 @@ public class TTPlayerImp implements TTPlayer {
 
 	@Override
 	public boolean lockBar(BossBar bar, boolean lock) {
-		// TODO Auto-generated method stub
-		return false;
+		return BARS.replace(bar, lock);
 	}
 
 	@SuppressWarnings("deprecation")
