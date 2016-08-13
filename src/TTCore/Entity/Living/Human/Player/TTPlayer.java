@@ -16,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Implementation.Living.Human.Player.TTPlayerImp;
+import TTCore.Rank.Rank;
 import ru.tehkode.permissions.PermissionGroup;
 
 /**
@@ -120,6 +121,12 @@ public interface TTPlayer extends TTEntity, TTAccount {
 	 * @return gets the pex permission name
 	 */
 	public PermissionGroup getPermissionGroup();
+	
+	/**
+	 * 
+	 * @return gets the rank of the player
+	 */
+	public Rank getRank();
 
 	/**
 	 * @param return

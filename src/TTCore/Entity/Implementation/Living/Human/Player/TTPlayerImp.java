@@ -20,6 +20,7 @@ import TTCore.Entity.TTEntity;
 import TTCore.Entity.Living.Human.Player.TTAccount;
 import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
+import TTCore.Rank.Rank;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import ru.tehkode.permissions.PermissionGroup;
@@ -219,6 +220,11 @@ public class TTPlayerImp implements TTPlayer {
 		List<PermissionGroup> group = Arrays.asList(user.getGroups());
 		group.remove(user.getParents());
 		return group.get(0);
+	}
+
+	@Override
+	public Rank getRank() {
+		return new Rank(getPermissionGroup());
 	}
 
 }
