@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
-import TTCore.Mech.DataStores.SavableDataStore;
+import TTCore.Mech.DataStore;
 
 /**
  * 
@@ -27,7 +27,7 @@ import TTCore.Mech.DataStores.SavableDataStore;
  * 
  */
 
-public interface TTEntity extends SavableDataStore {
+public interface TTEntity {
 
 	/**
 	 * ROOT FILE should not be used, please get getFile() instead.
@@ -77,7 +77,13 @@ public interface TTEntity extends SavableDataStore {
 	 * @return = the TTEntity
 	 */
 	public static Optional<TTEntity> getRelatedMech(DataHandler data){
-		return TTEntity.REGISTERED_ENTITIES.stream().filter(p -> p.getData().contains(data)).findFirst();
+		return TTEntity.REGISTERED_ENTITIES.stream().filter(p -> {
+			if(p instanceof DataStore){
+				DataStore store = (DataStore)p;
+				return store.getData().contains(data);
+			}
+			return false;
+		}).findFirst();
 	}
 
 }

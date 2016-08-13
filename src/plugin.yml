@@ -2,4 +2,7 @@ name: TTCore
 version: 1.0
 main: TTCore.TTCoreMain
 depend: [Vault]
-
+commands:
+  developer:
+    usage: /developer
+    description: All the developer commands for TTCore

@@ -1,5 +1,7 @@
 package TTCore.Mech.DataHandlers;
 
+import TTCore.Mech.DataHandler;
+
 /**
  *
  * @author mosemister (Evan)
@@ -9,7 +11,7 @@ package TTCore.Mech.DataHandlers;
  * 
  */
 
-public interface PlayerData {
+public interface PlayerData extends DataHandler{
 
 	/*
 	 * only extend for PlayerDataHandlers

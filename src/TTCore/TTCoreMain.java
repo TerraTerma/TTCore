@@ -3,6 +3,7 @@ package TTCore;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import TTCore.NotAPI.Listeners.Commands;
 import TTCore.NotAPI.Listeners.Listeners;
 import net.milkbowl.vault.economy.Economy;
 
@@ -14,6 +15,7 @@ public class TTCoreMain extends JavaPlugin {
 	public void onEnable() {
 		PLUGIN = this;
 		getServer().getPluginManager().registerEvents(new Listeners(), this);
+		getCommand("developer").setExecutor(new Commands());
 		setupEco();
 	}
 
