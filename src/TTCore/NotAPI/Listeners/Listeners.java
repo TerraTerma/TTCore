@@ -24,9 +24,7 @@ public class Listeners implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void playerJoinEvent(PlayerJoinEvent event) {
-		//new TTPlayerImp(event.getPlayer());
-		TTPlayer player = new TTPlayerImp(event.getPlayer());
-		player.getPermissionGroup();
+		new TTPlayerImp(event.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
