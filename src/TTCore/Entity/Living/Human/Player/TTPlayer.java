@@ -187,4 +187,6 @@ public interface TTPlayer extends TTEntity, TTAccount {
 		}).collect(Collectors.toList());
 		return entities;
 	}
+	
+	public void sendMessage(String unformattedMessage);
 }

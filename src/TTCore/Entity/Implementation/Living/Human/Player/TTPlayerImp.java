@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -124,6 +125,11 @@ public class TTPlayerImp implements TTPlayer {
 	@Override
 	public void sendMessage(String prefix, String message) {
 		getPlayer().sendMessage("[" + prefix + "] " + message);
+	}
+	
+	@Override
+	public void sendMessage(String unformattedMessage){
+		getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', unformattedMessage));
 	}
 
 	@Override
