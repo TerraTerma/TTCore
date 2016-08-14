@@ -87,7 +87,22 @@ public interface TTAccount extends SavableDataStore {
 			TTAccount account = new TTAccountImp(player);
 			return Optional.of(account);
 		}
-		return null;
+		return opPlayer;
+	}
+	
+	public static Optional<TTAccount> getAccount(UUID name){
+		Optional<TTAccount> opPlayer = getAccounts().stream().filter(p -> {
+			return (p.getPlayer().getUniqueId().equals(name));
+		}).findFirst();
+		if(opPlayer.isPresent()){
+			return opPlayer;
+		}
+		OfflinePlayer player = Bukkit.getOfflinePlayer(name);
+		if(player != null){
+			TTAccount account = new TTAccountImp(player);
+			return Optional.of(account);
+		}
+		return opPlayer;
 	}
 
 }

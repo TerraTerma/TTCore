@@ -1,10 +1,8 @@
 package TTCore.Entity.Living.Human.Player;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -16,6 +14,7 @@ import org.bukkit.plugin.Plugin;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Implementation.Living.Human.Player.TTPlayerImp;
+import TTCore.Entity.Living.Human.Player.Lists.AccountList;
 import TTCore.Rank.Rank;
 import ru.tehkode.permissions.PermissionGroup;
 
@@ -184,14 +183,14 @@ public interface TTPlayer extends TTEntity, TTAccount {
 		return Optional.empty();
 	}
 	
-	public static List<TTEntity> getPlayers(){
-		List<TTEntity> entities = REGISTERED_ENTITIES.stream().filter(e -> {
+	public static AccountList<TTPlayer> getPlayers(){
+		AccountList<TTPlayer> players = new AccountList<>();
+		REGISTERED_ENTITIES.stream().forEach(e -> {
 			Entity entity = e.getEntity();
 			if (entity instanceof Player) {
-				return true;
+				players.add((TTPlayer)entity);
 			}
-			return false;
-		}).collect(Collectors.toList());
-		return entities;
+		});
+		return players;
 	}
 }
