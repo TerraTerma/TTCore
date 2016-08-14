@@ -22,6 +22,7 @@ import TTCore.Entity.TTEntity;
 import TTCore.Entity.Living.Human.Player.TTAccount;
 import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
+import TTCore.Mech.DefaultMechs.MessageFormatData;
 import TTCore.Rank.Rank;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -135,10 +136,15 @@ public class TTPlayerImp implements TTPlayer {
 	
 	@Override
 	public void sendMessageFromPlayer(TTPlayer player, String unformattedMessage){
+		System.out.println("send message from player");
 		Player bPlayer = player.getPlayer();
-		String coloured = ChatColor.translateAlternateColorCodes('&', unformattedMessage);
-		if(StringUtils.containsIgnoreCase(coloured, "%World%")){
-			coloured = coloured.replace("%World%", bPlayer.getWorld().getName());
+		MessageFormatData data = player.getSingleData(MessageFormatData.class).get();
+		String format = data.getChatFormat();
+		if(StringUtils.containsIgnoreCase(format, "%World%")){
+			format = format.replace("%World%", bPlayer.getWorld().getName());
+		}
+		if(StringUtils.containsIgnoreCase(format, "%Message%")){
+			format = format.replace("%Message%", unformattedMessage);
 		}
 		/* do the same for the following.
 		 * %name% - player normal name
@@ -147,8 +153,8 @@ public class TTPlayerImp implements TTPlayer {
 		 * %prefix% - playera groups prefix
 		 * 
 		 * any others you think of*/
-		
-		getPlayer().sendMessage(coloured);
+		format = ChatColor.translateAlternateColorCodes('&', format);
+		getPlayer().sendMessage(format);
 	}
 
 	@Override
