@@ -130,6 +130,11 @@ public class TTPlayerImp implements TTPlayer {
 	}
 
 	@Override
+	public void sendMessage(String message) {
+		getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+	}
+
+	@Override
 	public void sendMessage(Plugin plugin, String message) {
 		getPlayer().sendMessage("[" + plugin.getName() + "] " + message);
 	}

@@ -49,6 +49,7 @@ public interface TTPlayer extends TTEntity, TTAccount {
 	 */
 	public void sendMessage(Plugin plugin, String message);
 
+	public void sendMessage(String message);
 	/**
 	 * this sends a player a message in the TTCore format
 	 * 
