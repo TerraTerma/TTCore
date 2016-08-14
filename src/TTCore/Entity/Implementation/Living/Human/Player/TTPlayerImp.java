@@ -136,7 +136,6 @@ public class TTPlayerImp implements TTPlayer {
 	
 	@Override
 	public void sendMessageFromPlayer(TTPlayer player, String unformattedMessage){
-		System.out.println("send message from player");
 		Player bPlayer = player.getPlayer();
 		MessageFormatData data = player.getSingleData(MessageFormatData.class).get();
 		String format = data.getChatFormat();
@@ -146,13 +145,19 @@ public class TTPlayerImp implements TTPlayer {
 		if(StringUtils.containsIgnoreCase(format, "%Message%")){
 			format = format.replace("%Message%", unformattedMessage);
 		}
-		/* do the same for the following.
-		 * %name% - player normal name
-		 * %dname% - players display name 
-		 * %group% - players rank name
-		 * %prefix% - playera groups prefix
-		 * 
-		 * any others you think of*/
+		if(StringUtils.containsIgnoreCase(format, "%Name%")){  
+			format = format.replace("%Name%", bPlayer.getName());  
+		}  
+		if(StringUtils.containsIgnoreCase(format, "%Group%")){  
+			format = format.replace("%Group%", player.getPermissionGroup().getName());  
+		}  
+		if(StringUtils.containsIgnoreCase(format, "%dName%")){  
+			format = format.replace("%dName%", bPlayer.getDisplayName());  
+		}  
+		if(StringUtils.containsIgnoreCase(format, "%Prefix%")){  
+			format = format.replace("%Prefix%", player.getPermissionGroup().getPrefix());  
+		}  
+
 		format = ChatColor.translateAlternateColorCodes('&', format);
 		getPlayer().sendMessage(format);
 	}
