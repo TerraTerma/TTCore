@@ -189,7 +189,7 @@ public interface TTPlayer extends TTEntity, TTAccount {
 		REGISTERED_ENTITIES.stream().forEach(e -> {
 			Entity entity = e.getEntity();
 			if (entity instanceof Player) {
-				players.add((TTPlayer)entity);
+				players.add((TTPlayer)e);
 			}
 		});
 		return players;
