@@ -16,7 +16,7 @@ import TTCore.Mech.DefaultMechs.FlyingBlock;
  * this is for testing purposes only
  *
  */
-public class Commands implements CommandExecutor {
+public class DeveloperCommands implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String length, String[] args) {

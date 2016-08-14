@@ -7,8 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import TTCore.Mech.DataHandler;
 import TTCore.Mech.DefaultMechs.MessageFormatData;
-import TTCore.NotAPI.Listeners.Commands;
+import TTCore.NotAPI.Listeners.DeveloperCommands;
 import TTCore.NotAPI.Listeners.Listeners;
+import TTCore.NotAPI.Listeners.TTCoreCommand;
+import TTCore.Versions.TTVersion;
 import net.milkbowl.vault.economy.Economy;
 
 public class TTCoreMain extends JavaPlugin {
@@ -19,7 +21,9 @@ public class TTCoreMain extends JavaPlugin {
 	public void onEnable() {
 		PLUGIN = this;
 		getServer().getPluginManager().registerEvents(new Listeners(), this);
-		getCommand("developer").setExecutor(new Commands());
+		getCommand("developer").setExecutor(new DeveloperCommands());
+		getCommand("ttcore").setExecutor(new TTCoreCommand());
+		new TTVersion();
 		setupEco();
 		loadMechs();
 	}

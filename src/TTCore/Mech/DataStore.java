@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import TTCore.Versions.VersionTrack;
+
 /**
  * 
  * @author mosemister (Evan)
@@ -117,6 +119,30 @@ public interface DataStore {
 			return true;
 		}
 
+	}
+	
+	public static class MechVersion implements VersionTrack {
+
+		@Override
+		public int getMajorVersion() {
+			return 2;
+		}
+
+		@Override
+		public int getSubMajorVersion() {
+			return 2;
+		}
+
+		@Override
+		public int getMinorVersion() {
+			return 0;
+		}
+
+		@Override
+		public int getHotfixVersion() {
+			return 1;
+		}
+		
 	}
 
 }

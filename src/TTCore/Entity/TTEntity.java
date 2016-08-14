@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import TTCore.Entity.Living.Human.Player.TTPlayer;
 import TTCore.Mech.DataHandler;
 import TTCore.Mech.DataStore;
+import TTCore.Versions.VersionTrack;
 
 /**
  * 
@@ -84,6 +85,30 @@ public interface TTEntity {
 			}
 			return false;
 		}).findFirst();
+	}
+	
+	public static class TTEntityVersion implements VersionTrack{
+
+		@Override
+		public int getMajorVersion() {
+			return 1;
+		}
+
+		@Override
+		public int getSubMajorVersion() {
+			return 0;
+		}
+
+		@Override
+		public int getMinorVersion() {
+			return 1;
+		}
+
+		@Override
+		public int getHotfixVersion() {
+			return 3;
+		}
+		
 	}
 
 }

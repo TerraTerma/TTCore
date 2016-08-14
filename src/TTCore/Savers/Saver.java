@@ -10,6 +10,8 @@ import java.util.Optional;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import TTCore.Versions.VersionTrack;
+
 /**
  *
  * @author mosemister (Evan)
@@ -18,12 +20,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
  *      ---------------------------------------------------------
  * @author mosemister (Evan)
  * @since 03/08/2016 (DD/MM/YYYY) 22:35 (24 hour - UK time)
- * @git Mechs now save
- *      ---------------------------------------------------------
+ * @git Mechs now save ---------------------------------------------------------
  * @author mosemister (Evan)
  * @since 04/08/2016 (DD/MM/YYYY) 13:59 (24 hour - UK time)
- * @git Section fix
- * 		---------------------------------------------------------
+ * @git Section fix ---------------------------------------------------------
  * 
  */
 
@@ -45,12 +45,12 @@ public class Saver {
 	public YamlConfiguration getConfig() {
 		return CONFIG;
 	}
-	
-	public void remove(String... path){
+
+	public void remove(String... path) {
 		set(null, path);
 	}
-	
-	public void remove(String[] args, String... path){
+
+	public void remove(String[] args, String... path) {
 		set(null, args, path);
 	}
 
@@ -72,7 +72,7 @@ public class Saver {
 		}
 		return (T) object;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public <T extends Object> T get(Class<T> type, String[] path, String... loc) {
 		String location = null;
@@ -98,12 +98,12 @@ public class Saver {
 		}
 		return (T) object;
 	}
-	
-	public Optional<String> getSection(){
+
+	public Optional<String> getSection() {
 		return Optional.ofNullable(SECTION);
 	}
-	
-	public Map<String, Object> values(boolean embed){
+
+	public Map<String, Object> values(boolean embed) {
 		Map<String, Object> map = new HashMap<>();
 		CONFIG.getValues(embed).entrySet().forEach(e -> {
 			map.put(e.getKey().replace(SECTION, ""), e.getValue());
@@ -123,7 +123,7 @@ public class Saver {
 		SECTION = location;
 		return this;
 	}
-	
+
 	public Saver setSection(String[] args, String... loc) {
 		String location = null;
 		for (String loc2 : args) {
@@ -169,7 +169,7 @@ public class Saver {
 		}
 		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public <T extends Object> List<T> getList(Class<T> type, String[] path, String... loc) {
 		String location = null;
@@ -219,7 +219,7 @@ public class Saver {
 		}
 		return this;
 	}
-	
+
 	public Saver set(Object object, String[] path, String... loc) {
 		String location = null;
 		for (String loc2 : path) {
@@ -251,6 +251,30 @@ public class Saver {
 		} catch (IOException e) {
 			return false;
 		}
+	}
+
+	public static class SaverVersion implements VersionTrack {
+
+		@Override
+		public int getMajorVersion() {
+			return 1;
+		}
+
+		@Override
+		public int getSubMajorVersion() {
+			return 1;
+		}
+
+		@Override
+		public int getMinorVersion() {
+			return 0;
+		}
+
+		@Override
+		public int getHotfixVersion() {
+			return 0;
+		}
+
 	}
 
 }

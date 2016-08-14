@@ -6,3 +6,6 @@ commands:
   developer:
     usage: /developer
     description: All the developer commands for TTCore
+  ttcore:
+    usage: /ttcore
+    description: ttcore host commands

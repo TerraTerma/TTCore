@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import TTCore.TTCoreMain;
+import TTCore.Versions.VersionTrack;
 
 public abstract class OversizedTicker {
 	
@@ -64,6 +65,30 @@ public abstract class OversizedTicker {
 			}
 			
 		}, 0, TICK_TIME);
+	}
+	
+	public static class OversizedVersion implements VersionTrack{
+
+		@Override
+		public int getMajorVersion() {
+			return 0;
+		}
+
+		@Override
+		public int getSubMajorVersion() {
+			return 0;
+		}
+
+		@Override
+		public int getMinorVersion() {
+			return 1;
+		}
+
+		@Override
+		public int getHotfixVersion() {
+			return 1;
+		}
+		
 	}
 
 }
