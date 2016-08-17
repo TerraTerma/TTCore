@@ -12,6 +12,7 @@ import org.bukkit.OfflinePlayer;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Implementation.Living.Human.Player.TTAccountImp;
+import TTCore.Entity.Living.Human.Player.DefaultMethods.TTDefaultAccount;
 import TTCore.Mech.DataStores.SavableDataStore;
 
 /**
@@ -31,7 +32,7 @@ import TTCore.Mech.DataStores.SavableDataStore;
  * @git added static methods for getting offlineAccount
  */
 
-public interface TTAccount extends SavableDataStore {
+public interface TTAccount extends SavableDataStore, TTDefaultAccount {
 
 	/**
 	 * if the player is online, use this to get the correct
@@ -63,10 +64,10 @@ public interface TTAccount extends SavableDataStore {
 			Arrays.asList(files).stream().forEach(f -> {
 				UUID uuid = UUID.fromString(f.getName().replace(".yml", ""));
 				if(onlineUUID.contains(uuid)){
-					TTAccount account = new TTAccountImp(Bukkit.getOfflinePlayer(uuid));
+					TTAccount account = TTPlayer.getPlayer(uuid).get();
 					accounts.add(account);
 				}else{
-					TTAccount account = TTPlayer.getPlayer(uuid).get();
+					TTAccount account = new TTAccountImp(Bukkit.getOfflinePlayer(uuid));
 					accounts.add(account);
 				}
 			});

@@ -1,8 +1,11 @@
 package TTCore.Entity.Implementation.Living.Human.Player;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 
 import TTCore.Entity.TTEntity;
@@ -70,6 +73,46 @@ public class TTAccountImp extends AbstractSavableDataStore implements TTAccount 
 	@Override
 	public Optional<TTPlayer> getOnline() {
 		return TTPlayer.getPlayer(getPlayer().getUniqueId());
+	}
+
+	@Override
+	public String getName() {
+		return getPlayer().getName();
+	}
+
+	@Override
+	public UUID getUUID() {
+		return getPlayer().getUniqueId();
+	}
+
+	@Override
+	public LocalDate getFirstJoinDate() {
+		return null; /* EVAN FIX */
+	}
+
+	@Override
+	public LocalDate getLastPlayedDate() {
+		return null; /* EVAN FIX */
+	}
+
+	@Override
+	public Location getBedSpawn() {
+		return getPlayer().getBedSpawnLocation();
+	}
+
+	@Override
+	public boolean isBanned() {
+		return getPlayer().isBanned();
+	}
+
+	@Override
+	public boolean isOnline() {
+		return getPlayer().isOnline();
+	}
+
+	@Override
+	public boolean hasPlayedBefore() {
+		return getPlayer().hasPlayedBefore();
 	}
 
 }

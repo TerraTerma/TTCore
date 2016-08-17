@@ -6,8 +6,8 @@ import TTCore.Savers.Saver;
 
 public class MessageFormatData implements PlayerData, SavableData {
 
-	String CHAT_FORMAT = "&8[&6%world%&8] [&2%Prefix%&8] &2%dName%&8 : &2%message%";
-	String STAFF_CHAT_FORMAT = "&8[&6STAFF&8] &2%dName%&8 : &2%message%";
+	String CHAT_FORMAT = "&8[&6%World%&8] [&2%Prefix%&8] &2%dName%&8 : &2%Message%";
+	String STAFF_CHAT_FORMAT = "&8[&6STAFF&8] &8[&6%World%&8] &2%dName%&8 : &2%Message%";
 	private static MessageFormatData mfd;
 
 	public String getChatFormat() {

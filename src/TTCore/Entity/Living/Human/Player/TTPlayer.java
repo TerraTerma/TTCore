@@ -14,7 +14,9 @@ import org.bukkit.plugin.Plugin;
 
 import TTCore.Entity.TTEntity;
 import TTCore.Entity.Implementation.Living.Human.Player.TTPlayerImp;
+import TTCore.Entity.Living.Human.Player.DefaultMethods.TTDefaultPlayer;
 import TTCore.Entity.Living.Human.Player.Lists.AccountList;
+import TTCore.Entity.Living.Human.Player.MessageFormats.MessageFormat;
 import TTCore.Rank.Rank;
 import ru.tehkode.permissions.PermissionGroup;
 
@@ -37,7 +39,7 @@ import ru.tehkode.permissions.PermissionGroup;
  * 
  */
 
-public interface TTPlayer extends TTEntity, TTAccount {
+public interface TTPlayer extends TTEntity, TTAccount, TTDefaultPlayer {
 
 	/**
 	 * this sends a player a message in the TTCore format.
@@ -75,6 +77,7 @@ public interface TTPlayer extends TTEntity, TTAccount {
 	 */
 	public void sendMessageFromPlayer(TTPlayer player, String unformattedMessage);
 
+	public void sendMessageFromPlayer(TTPlayer player, String message, MessageFormat format);
 	/**
 	 * gets the amount of money the player currently has
 	 * 
