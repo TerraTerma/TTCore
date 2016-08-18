@@ -35,6 +35,8 @@ public interface DataStore {
 	public <M extends DataHandler> List<M> getData(Class<M> data);
 
 	public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech);
+	
+	public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech, boolean forceAdd);
 
 	public boolean addSingleData(boolean force, DataHandler data);
 
@@ -59,7 +61,10 @@ public interface DataStore {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <M extends DataHandler> Optional<M> getSingleData(Class<M> mech) {
-			return (Optional<M>) DATA.stream().filter(m -> mech.isInstance(m)).findFirst();
+			return (Optional<M>) DATA.stream().filter(m -> {
+				System.out.println(m.getClass().getSimpleName());
+				return mech.isInstance(m);
+			}).findFirst();
 		}
 
 		@SuppressWarnings("unchecked")
@@ -70,13 +75,18 @@ public interface DataStore {
 
 		@Override
 		public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech) {
+			return getOrCreateSingleData(mech, false);
+		}
+		
+		@Override
+		public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech, boolean force) {
 			Optional<M> value = getSingleData(mech);
 			if (value.isPresent()) {
 				return value.get();
 			} else {
 				try {
 					M value2 = mech.newInstance();
-					addSingleData(false, value2);
+					addSingleData(force, value2);
 					return value2;
 				} catch (InstantiationException | IllegalAccessException e) {
 					e.printStackTrace();
@@ -111,11 +121,17 @@ public interface DataStore {
 
 		@Override
 		public boolean removeData(Class<? extends DataHandler> mech) {
-			DATA.stream().forEach(d -> {
+			for(int A = 0; A < DATA.size(); A++){
+				DataHandler data = DATA.get(A);
+				if (mech.isInstance(data)) {
+					DATA.remove(data);
+				}
+			}
+			/*DATA.stream().forEach(d -> {
 				if (mech.isInstance(d)) {
 					DATA.remove(d);
 				}
-			});
+			});*/
 			return true;
 		}
 

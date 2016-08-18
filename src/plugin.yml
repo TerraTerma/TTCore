@@ -9,3 +9,6 @@ commands:
   ttcore:
     usage: /ttcore
     description: ttcore host commands
+  query:
+    usage: /query <query>
+    description: find all commands relating to the query

@@ -9,6 +9,7 @@ import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -157,10 +158,10 @@ public interface TTPlayer extends TTEntity, TTAccount, TTDefaultPlayer {
 	 *            = Bukkit Player object
 	 * @return = TTPlayer object
 	 */
-	public static TTPlayer getPlayer(Player player) {
+	public static TTPlayer getPlayer(HumanEntity player) {
 		Optional<TTEntity> opEntity = REGISTERED_ENTITIES.stream().filter(e -> {
 			Entity entity = e.getEntity();
-			if (entity instanceof Player) {
+			if (entity instanceof HumanEntity) {
 				return (entity.equals(player));
 			}
 			return false;
@@ -168,9 +169,10 @@ public interface TTPlayer extends TTEntity, TTAccount, TTDefaultPlayer {
 
 		if (opEntity.isPresent()) {
 			return (TTPlayer) opEntity.get();
-		} else {
-			return new TTPlayerImp(player);
+		} else if (player instanceof Player){
+			return new TTPlayerImp((Player)player);
 		}
+		return null;
 	}
 	
 	public static Optional<TTPlayer> getPlayer(UUID uuid){

@@ -110,6 +110,11 @@ public class TTPlayerImp implements TTPlayer {
 	public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech) {
 		return ACCOUNT.getOrCreateSingleData(mech);
 	}
+	
+	@Override
+	public <M extends DataHandler> M getOrCreateSingleData(Class<M> mech, boolean force) {
+		return ACCOUNT.getOrCreateSingleData(mech, force);
+	}
 
 	@Override
 	public boolean addSingleData(boolean force, DataHandler data) {

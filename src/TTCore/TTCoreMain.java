@@ -9,6 +9,7 @@ import TTCore.Mech.DataHandler;
 import TTCore.Mech.DefaultMechs.MessageFormatData;
 import TTCore.NotAPI.Listeners.DeveloperCommands;
 import TTCore.NotAPI.Listeners.Listeners;
+import TTCore.NotAPI.Listeners.QueryCommand;
 import TTCore.NotAPI.Listeners.TTCoreCommand;
 import TTCore.Versions.TTVersion;
 import net.milkbowl.vault.economy.Economy;
@@ -23,6 +24,7 @@ public class TTCoreMain extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Listeners(), this);
 		getCommand("developer").setExecutor(new DeveloperCommands());
 		getCommand("ttcore").setExecutor(new TTCoreCommand());
+		getCommand("query").setExecutor(new QueryCommand());
 		new TTVersion();
 		setupEco();
 		loadMechs();
